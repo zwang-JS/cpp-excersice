@@ -11,7 +11,7 @@ class Combination {
             dNum=i;
             cNum=5*dNum+1;
             pPtr=new long long int*[cNum]
-            for (int j=0; j<cNum; j++0) {
+            for (int j=0; j<cNum; j++) {
                 pPtr[j]=new long long int *[2];
                 pPtr[j][0]=0;
                 pPtr[j][1]=dNum+j;

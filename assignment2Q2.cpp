@@ -10,16 +10,17 @@ class Combination {
         Combination(int i = 1) {
             dNum=i;
             cNum=5*dNum+1;
-            pPtr=new long long int*[cNum]
-            for (int j=0; j<cNum; j++) {
-                pPtr[j]=new long long int *[2];
-                pPtr[j][0]=0;
-                pPtr[j][1]=dNum+j;
+            pPtr = new long long int*[cNum];
+            for (int j = 0; j < cNum; j++) {
+                pPtr[j] = new long long int[2];
+                pPtr[j][0] = 0;
+                pPtr[j][1] = dNum + j;
             }
 
             if (dNum==1) findSum1();
             else if (dNum==2) findSum2();
             else if (dNum==3) findSum3();
+            else if (dNum==4) findSum4();
 
         /************** to be finished **************/
 
@@ -38,6 +39,7 @@ class Combination {
         void findSum1();
         void findSum2();
         void findSum3();
+        void findSum4();
         
         /************** to be finished **************/
         void sortBySum();
@@ -65,14 +67,17 @@ void Combination::findSum3() {
         }
     }
 }
+void Combination::findSum4() {
+    for(int a=1;a<=6;a++)
+    for(int b=1;b<=6;b++)
+    for(int c=1;c<=6;c++)
+    for(int d=1;d<=6;d++)
+        pPtr[a+b+c+d-4][0]++;
+}
 void Combination::sortBySum() {
     for (int i=0; i<cNum-1; i++){
         for (int j=0; j<cNum-1-i; j++){
-            if (pPtr[j][1] > pPtr[j+1][1]){
-                long long int *temp = pPtr[j];
-                pPtr[j] = pPtr[j+1];
-                pPtr[j+1] = temp;
-            }
+            if (pPtr[j][1] < pPtr[j+1][1]) swap(pPtr[j], pPtr[j+1]);  // 降序
         }
     }
     for (int i=0; i<cNum; i++){
@@ -82,7 +87,7 @@ void Combination::sortBySum() {
 void Combination::sortByOcc() {
     for (int i=0; i<cNum-1; i++){
         for (int j=0; j<cNum-1-i; j++){
-            if (pPtr[j][0] > pPtr[j+1][0]){
+            if (pPtr[j][0] < pPtr[j+1][0]){
                 long long int *temp = pPtr[j];
                 pPtr[j] = pPtr[j+1];
                 pPtr[j+1] = temp;
